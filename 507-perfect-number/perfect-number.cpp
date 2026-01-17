@@ -10,7 +10,6 @@ public:
             }
         }
         cnt = cnt + 1;
-        if(cnt == num) return true;
-        else return false;
+        return (cnt == num);
     }
 };
