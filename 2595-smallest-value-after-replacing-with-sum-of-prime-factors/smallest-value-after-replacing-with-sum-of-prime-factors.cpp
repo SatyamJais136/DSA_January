@@ -2,8 +2,8 @@ class Solution {
 public:
     bool isPrime(int n){
         if(n == 1 || n == 0) return false;
-        int limit = (int)sqrt(n);
-        for(int i = 2; i <= limit; i++){
+        //int limit = (int)sqrt(n);
+        for(int i = 2; i * i <= n; i++){
             if(n % i == 0) return false;
         }
         return true;
