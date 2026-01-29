@@ -1,18 +1,14 @@
 class Solution {
 public:
-    int helper(vector<int> &dp, int n){
+    int fib(int n) {
         if(n == 0) return 0;
         if(n == 1) return 1;
-        // if we have already calculated the value
-        if(dp[n] != -1){
-            return dp[n];
+        vector<int> dp(n+1);
+        dp[0] = 0;
+        dp[1] = 1;
+        for(int i = 2; i <= n; i++){
+            dp[i] = dp[i-1] + dp[i-2];
         }
-        dp[n] = helper(dp, n-1) + helper(dp, n-2);
         return dp[n];
-    }
-
-    int fib(int n) {
-        vector<int> dp(n+1, -1);
-        return helper(dp, n);
     }
 };
