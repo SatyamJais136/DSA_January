@@ -1,29 +1,29 @@
 class Solution {
-public:
-    bool isPalindrome(int i, int j, string &s){
-        while(i <= j){
-            if(s[i++] != s[j--]) return false;
+private:
+    bool isPal(int i,int j,string &s){
+        while(i<j){
+            if(s[i]!=s[j])return false;
+            i++;
+            j--;
         }
         return true;
     }
-
-    int rec(int i, int j, string &s, vector<vector<int>> &dp){
-        if(i >= j || isPalindrome(i, j, s)) return 0;
-        if(dp[i][j] != -1) return dp[i][j];
-
-        int ans = INT_MAX;
-        for(int k = i; k < j; k++){
-            if(isPalindrome(i, k, s)){
-                int op = 1 + rec(k+1, j, s, dp);
-                ans = min(ans, op);
-            }
-        }
-        return dp[i][j] = ans;
-    }
-
+    
+public:
     int minCut(string s) {
-        int n = s.size();
-        vector<vector<int>> dp(n, vector<int>(n, -1));
-        return rec(0, n-1, s, dp);
+        int n=s.length();
+        vector<int>dp(n+1);
+        dp[n]=0;
+        for(int i=n-1;i>=0;i--){
+        int minCost=INT_MAX;
+            for(int j=i;j<n;j++){
+                if(isPal(i,j,s)){
+                    int cost=1+dp[j+1];
+                    minCost=min(minCost,cost);
+                }
+            }
+            dp[i]=minCost;
+        }
+        return dp[0]-1;
     }
 };
